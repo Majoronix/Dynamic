@@ -1,0 +1,59 @@
+{
+	"geode": "5.10.1",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081"
+	},
+	"id": "majoronix.dynamic",
+	"name": "Dynamic",
+	"version": "v1.0.0",
+	"developer": "majoronix",
+	"description": "ES: Asistente de precisión de clics. Mueve tus propios clics hasta N ticks hacia adelante si así evitas morir. No inventa inputs. / EN: Click-timing precision assist. Delays your own clicks by up to N ticks when that avoids a death. Never invents inputs.",
+	"settings": {
+		"enabled": {
+			"type": "bool",
+			"name": "Activar Dynamic / Enable Dynamic",
+			"description": "Activa o desactiva el asistente. / Turns the assist on or off.",
+			"default": true
+		},
+		"margin": {
+			"type": "int",
+			"name": "Margen de corrección (ticks) / Correction margin (ticks)",
+			"description": "Máximo de ticks que se puede retrasar un clic (0 = sin corrección). / Maximum number of ticks a click may be delayed (0 = no correction).",
+			"default": 4,
+			"min": 0,
+			"max": 16,
+			"control": {
+				"slider": true,
+				"arrows": true,
+				"input": true
+			}
+		},
+		"wave-only": {
+			"type": "bool",
+			"name": "Solo modo wave / Wave only",
+			"description": "Si está activo, solo corrige clics mientras eres wave. / If on, only corrects clicks while you are a wave.",
+			"default": false
+		},
+		"toggle-key": {
+			"type": "keybind",
+			"name": "Atajo para activar/desactivar / Toggle shortcut",
+			"description": "Tecla para activar o desactivar Dynamic en partida (sin asignar por defecto). / Key to toggle Dynamic in a level (unassigned by default).",
+			"default": [],
+			"category": "gameplay"
+		},
+		"show-indicator": {
+			"type": "bool",
+			"name": "Indicador en pantalla / On-screen indicator",
+			"description": "Muestra 'Dynamic ON (N)' y un parpadeo al corregir un clic. / Shows 'Dynamic ON (N)' and a blink when a click is corrected.",
+			"default": true
+		},
+		"show-counter": {
+			"type": "bool",
+			"name": "Contador de clics corregidos / Corrected-click counter",
+			"description": "Añade al indicador cuántos clics se han corregido en la sesión. / Adds how many clicks were corrected this session to the indicator.",
+			"default": true
+		}
+	}
+}
