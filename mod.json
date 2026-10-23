@@ -7,8 +7,8 @@
 	},
 	"id": "majoronix.dynamic",
 	"name": "Dynamic",
-	"version": "v1.0.0",
-	"developer": "majoronix",
+	"version": "v1.2.0",
+	"developer": "Majoronix",
 	"description": "ES: Asistente de precisión de clics. Mueve tus propios clics hasta N ticks hacia adelante si así evitas morir. No inventa inputs. / EN: Click-timing precision assist. Delays your own clicks by up to N ticks when that avoids a death. Never invents inputs.",
 	"settings": {
 		"enabled": {
@@ -20,10 +20,10 @@
 		"margin": {
 			"type": "int",
 			"name": "Margen de corrección (ticks) / Correction margin (ticks)",
-			"description": "Máximo de ticks que se puede retrasar un clic (0 = sin corrección). / Maximum number of ticks a click may be delayed (0 = no correction).",
+			"description": "Máximo de ticks que se puede retrasar un clic (0 = sin corrección, máximo 64). / Maximum number of ticks a click may be delayed (0 = no correction, max 64).",
 			"default": 4,
 			"min": 0,
-			"max": 16,
+			"max": 64,
 			"control": {
 				"slider": true,
 				"arrows": true,
@@ -36,10 +36,121 @@
 			"description": "Si está activo, solo corrige clics mientras eres wave. / If on, only corrects clicks while you are a wave.",
 			"default": false
 		},
+		"mode-cube": {
+			"type": "bool",
+			"name": "Asistir en modo Cubo / Cube / Assist in Cubo / Cube mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-ship": {
+			"type": "bool",
+			"name": "Asistir en modo Nave / Ship / Assist in Nave / Ship mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-ball": {
+			"type": "bool",
+			"name": "Asistir en modo Bola / Ball / Assist in Bola / Ball mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-ufo": {
+			"type": "bool",
+			"name": "Asistir en modo UFO / Assist in UFO mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-wave": {
+			"type": "bool",
+			"name": "Asistir en modo Wave / Assist in Wave mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-robot": {
+			"type": "bool",
+			"name": "Asistir en modo Robot / Assist in Robot mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-spider": {
+			"type": "bool",
+			"name": "Asistir en modo Araña / Spider / Assist in Araña / Spider mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"mode-swing": {
+			"type": "bool",
+			"name": "Asistir en modo Swing / Assist in Swing mode",
+			"description": "Si lo desactivas, Dynamic no toca tus clics en este modo. / If off, Dynamic leaves your clicks untouched in this mode.",
+			"default": true
+		},
+		"sim-orbs": {
+			"type": "bool",
+			"name": "Simular orbes y pads / Simulate orbs and pads",
+			"description": "La simulación tiene en cuenta orbes y pads (experimental). Si los orbes se comportan raro, desactívalo. / The simulation accounts for orbs and pads (experimental). If orbs act weird, turn it off.",
+			"default": true
+		},
+		"sim-portals": {
+			"type": "bool",
+			"name": "Simular portales de tamaño y velocidad / Simulate size and speed portals",
+			"description": "La simulación tiene en cuenta portales de tamaño (mini/normal) y de velocidad. / The simulation accounts for size (mini/normal) and speed portals.",
+			"default": true
+		},
+		"sim-portals-adv": {
+			"type": "bool",
+			"name": "Simular portales de gravedad y de modo (muy experimental) / Simulate gravity and mode portals (very experimental)",
+			"description": "Incluye portales de gravedad y de vehículo. Si hay cierres del juego, desactívalo. / Includes gravity and vehicle portals. If the game crashes, turn it off.",
+			"default": false
+		},
+		"practice-only": {
+			"type": "bool",
+			"name": "Solo en Practice Mode / Practice Mode only",
+			"description": "Si está activo, Dynamic solo corrige en Practice Mode. / If on, Dynamic only works in Practice Mode.",
+			"default": false
+		},
+		"assist-release": {
+			"type": "bool",
+			"name": "Corregir también al soltar / Also correct releases",
+			"description": "Aplica la misma lógica al soltar el botón. Desactívalo para ahorrar rendimiento. / Applies the same logic to button releases. Turn off to save performance.",
+			"default": true
+		},
+		"lookahead-ticks": {
+			"type": "int",
+			"name": "Ticks de vista adelante / Lookahead ticks",
+			"description": "Cuántos ticks se simulan después del clic. Más = detecta más peligros pero gasta más y puede dar falsas alarmas. / Ticks simulated after the click. More = sees more danger but costs more and may give false alarms.",
+			"default": 6,
+			"min": 2,
+			"max": 32,
+			"control": {
+				"slider": true,
+				"arrows": true,
+				"input": true
+			}
+		},
+		"sim-budget-ms": {
+			"type": "float",
+			"name": "Límite de simulación (ms) / Simulation budget (ms)",
+			"description": "Tiempo máximo por clic. Si se pasa, el clic se deja tal cual (nunca se bloquea). 0 = sin límite. / Max time per click. If exceeded, the click is left untouched (never blocked). 0 = no limit.",
+			"default": 2.0,
+			"min": 0.0,
+			"max": 10.0,
+			"control": {
+				"slider": true,
+				"arrows": true,
+				"input": true
+			}
+		},
 		"toggle-key": {
 			"type": "keybind",
 			"name": "Atajo para activar/desactivar / Toggle shortcut",
 			"description": "Tecla para activar o desactivar Dynamic en partida (sin asignar por defecto). / Key to toggle Dynamic in a level (unassigned by default).",
+			"default": [],
+			"category": "gameplay"
+		},
+		"reset-key": {
+			"type": "keybind",
+			"name": "Atajo para reiniciar el contador / Reset counter shortcut",
+			"description": "Pone a cero el contador de clics corregidos. / Resets the corrected-click counter.",
 			"default": [],
 			"category": "gameplay"
 		},
@@ -54,6 +165,37 @@
 			"name": "Contador de clics corregidos / Corrected-click counter",
 			"description": "Añade al indicador cuántos clics se han corregido en la sesión. / Adds how many clicks were corrected this session to the indicator.",
 			"default": true
+		},
+		"indicator-corner": {
+			"type": "string",
+			"name": "Posición del indicador / Indicator position",
+			"description": "Esquina de la pantalla donde se muestra el indicador. / Screen corner for the indicator.",
+			"default": "Top-left",
+			"one-of": [
+				"Top-left",
+				"Top-right",
+				"Bottom-left",
+				"Bottom-right"
+			]
+		},
+		"indicator-opacity": {
+			"type": "int",
+			"name": "Opacidad del indicador (%) / Indicator opacity (%)",
+			"description": "Opacidad base del texto. / Base text opacity.",
+			"default": 35,
+			"min": 10,
+			"max": 100,
+			"control": {
+				"slider": true,
+				"arrows": true,
+				"input": true
+			}
+		},
+		"debug-log": {
+			"type": "bool",
+			"name": "Modo diagnóstico / Diagnostic mode",
+			"description": "Muestra tiempos de simulación en el indicador y escribe cada decisión en el log de Geode. / Shows simulation times in the indicator and logs each decision.",
+			"default": false
 		}
 	}
 }
